@@ -66,6 +66,12 @@ public class PostController {
                 model.addAttribute("pagrOwner", false);
             }
         }
+        String rawContent = postEntity.getContent();
+        String encContent = rawContent
+                .replaceAll("<script>", "&lt;script&gt;")
+                .replaceAll("</script>", "&lt;script/&gt;");
+        postEntity.setContent(encContent);
+        
         model.addAttribute("post", postEntity);
         return "post/detail";
     }
